@@ -85,6 +85,13 @@ static void customBoardDefaultConfiguration() {
 	engineConfiguration->can2TxPin = Gpio::B6;
 
 	engineConfiguration->isSdCardEnabled = true;
+	// SDIO pin mapping for STM32F427ZGT6
+	#define SDIO_D0  Gpio::D8
+	#define SDIO_D1  Gpio::D9
+	#define SDIO_D2  Gpio::D10
+	#define SDIO_D3  Gpio::D11
+	#define SDIO_CMD Gpio::D2
+	#define SDIO_CLK Gpio::C12
 }
 
 void setup_custom_board_overrides() {
