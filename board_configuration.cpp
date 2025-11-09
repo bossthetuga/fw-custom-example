@@ -94,6 +94,13 @@ static void customBoardDefaultConfiguration() {
 	#define SDIO_CLK Gpio::C12
 }
 
+#include "sd_card.h"
+
+void boardInitHardware() {
+    if (engineConfiguration->isSdCardEnabled) {
+        sdCardInit();
+    }
+
 void setup_custom_board_overrides() {
     custom_board_DefaultConfiguration = customBoardDefaultConfiguration;
 }
