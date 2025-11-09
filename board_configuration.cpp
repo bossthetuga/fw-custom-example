@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "board_overrides.h"
+#include "sd_card.h"
 
 Gpio getCommsLedPin() {
 	return Gpio::Unassigned;
@@ -85,6 +86,9 @@ static void customBoardDefaultConfiguration() {
 	engineConfiguration->can2TxPin = Gpio::B6;
 
 	engineConfiguration->isSdCardEnabled = true;
+	if (engineConfiguration->isSdCardEnabled) {
+        sdCardInit();
+		
 	// SDIO pin mapping for STM32F427ZGT6
 	#define SDIO_D0  Gpio::D8
 	#define SDIO_D1  Gpio::D9
@@ -93,13 +97,6 @@ static void customBoardDefaultConfiguration() {
 	#define SDIO_CMD Gpio::D2
 	#define SDIO_CLK Gpio::C12
 }
-
-#include "sd_card.h"
-
-void boardInitHardware() {
-    if (engineConfiguration->isSdCardEnabled) {
-        sdCardInit();
-    }
 
 void setup_custom_board_overrides() {
     custom_board_DefaultConfiguration = customBoardDefaultConfiguration;
